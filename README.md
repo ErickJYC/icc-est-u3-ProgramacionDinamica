@@ -22,7 +22,7 @@ Este proyecto presenta dos aplicaciones fundamentales de la recursión y la prog
 - Se comparan los tiempos de ejecución para evidenciar la eficiencia de la técnica de memoización.
 ## 2. Resolución de Laberintos
 - Se representa un laberinto como una matriz de valores booleanos (true para caminos, false para paredes).
-- Se implementa un algoritmo recursivo (MazeSolverRecursivo) que explora el laberinto en busca de un camino desde un punto de inicio hasta un destino.
+- Se implementa un algoritmo recursivo (MazeSolverCompletoRecursivo) que explora el laberinto en busca de un camino desde un punto de inicio hasta un destino.
 - Se incluye una versión extendida (MazeSolverRecursivo2) que permite explorar en las cuatro direcciones cardinales.
 - El camino encontrado se almacena y se imprime como una lista de coordenadas.
   Este proyecto refuerza conceptos clave como:
@@ -53,5 +53,8 @@ Para ejecutar el proyecto:
 ## 📤 Ejemplo de Salida Esperada
 ![img.png](img.png)
 
+---
+## ## 📤 Ejemplo de Salida Esperada 2
+![img_1.png](img_1.png)
 
 

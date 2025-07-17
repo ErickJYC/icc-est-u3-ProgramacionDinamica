@@ -1,37 +1,39 @@
+import models.Cell;
+import models.MazeResult;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class MazeSolverRecursivo implements MazeSolver{
-    @Override
-    public List<Cell> getPath(boolean[][] grid, Cell start, Cell end) {
-        List<Cell> path = new ArrayList<>();
-        if ( grid == null || grid.length == 0){
-            return path;
+    public MazeResult getPath(boolean[][] grid, Cell star, Cell end) {
+        List<Cell> path = new ArrayList();
+        if (grid != null && grid.length != 0) {
+            return this.findPath(grid, star, end, path) ? new MazeResult(path, (Set)null) : null;
+        } else {
+            return null;
         }
-        if (findPath(grid, start, end, path)) {
-            return path;
-        }
-        return path;
     }
-    private boolean findPath(boolean[][] grid, Cell start, Cell end, List<Cell> path) {
-        int fila = start.getRow();
-        int columna = start.getCol();
-        // Verificar si la celda actual es válida
-        if ( fila >= grid.length || columna >= grid[0].length || !grid[fila][columna]) {
-            return false; // Fuera de los límites o pared
+
+    private boolean findPath(boolean[][] grid, Cell star, Cell end, List<Cell> path) {
+        int row = star.row;
+        int col = star.col;
+        if (row < grid.length && col < grid[0].length && grid[row][col]) {
+            if (row == end.row && col == end.col) {
+                path.add(star);
+                return true;
+            } else if (!this.findPath(grid, new Cell(row + 1, col), end, path) && !this.findPath(grid, new Cell(row, col + 1), end, path)) {
+                return false;
+            } else {
+                path.add(star);
+                return true;
+            }
+        } else {
+            return false;
         }
-        if (columna == end.getCol() && fila == end.getRow()) {
-            path.add(start); // Se ha encontrado el final
-            return true;
-        }
-        if (findPath(grid, new Cell(columna + 1 ,fila), end, path)){
-            path.add(start); // Agregar la celda actual al camino
-            return true;
-        }
-        if (findPath(grid, new Cell(fila, columna + 1), end, path)){
-            path.add(start); // Agregar la celda actual al camino
-            return true;
-        }
-        return false;
+    }
+
+    public List<Cell> getPath1(boolean[][] grid, Cell start, Cell end) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

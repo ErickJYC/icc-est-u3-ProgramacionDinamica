@@ -2,35 +2,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EjerciciosPD {
-    public long getFibonacci(long n){
-        if(n <= 1){
-            return n;
-        }
-        return getFibonacci(n - 1) + getFibonacci(n - 2);
+    public long getFibonaci(long n) {
+        return n <= 1L ? n : this.getFibonaci(n - 1L) + this.getFibonaci(n - 2L);
     }
-    public long getFibonacciPD(long n){
-        Map<Long, Long> caching = new HashMap<>();
-        if(n <= 1){
-            return n;
-        }
-        if (caching.containsKey(n)) {
-            return caching.get(n);
-        } else{
-            long fib = getFibonacci(n);
-            caching.put(n, fib);
-        }
-        return caching.get(n);
+
+    public long getFibonaciPD(long n) {
+        Map<Long, Long> cache = new HashMap();
+        return this.getFibonaciPDHelper(n, cache);
     }
-    public long getFibonacciPDHelper(long n, Map<Long, Long> caching) {
-        if (n <= 1) {
+
+    private long getFibonaciPDHelper(long n, Map<Long, Long> cache) {
+        if (cache.containsKey(n)) {
+            return (Long)cache.get(n);
+        } else if (n <= 1L) {
             return n;
-        }
-        if (caching.containsKey(n)) {
-            return caching.get(n);
         } else {
-            long fib = getFibonacciPDHelper(n - 1, caching) + getFibonacciPDHelper(n - 2, caching);
-            caching.put(n, fib);
+            long resultado = this.getFibonaciPDHelper(n - 1L, cache) + this.getFibonaciPDHelper(n - 2L, cache);
+            cache.put(n, resultado);
+            return resultado;
         }
-        return caching.get(n);
     }
 }
